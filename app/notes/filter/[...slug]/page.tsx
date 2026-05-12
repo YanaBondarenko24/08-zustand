@@ -26,17 +26,18 @@ export async function generateMetadata({ searchParams, params }: Props):Promise<
     const tag = slug[0];
   const rawTag = tag === "all" ? undefined : (tag as NoteTag | undefined);
   const notes = await fetchNotes(query, page, rawTag);
-  const currentTag = rawTag ?? "All";
+  const titleTag = rawTag ?? "All";
+  const urlTag = rawTag ?? "all"
 
   return {
 
    
-    title: `${currentTag} notes`,
-    description: `You have ${notes.notes.length} ${rawTag} notes.`,
+    title: `${titleTag} notes`,
+    description: `You have ${notes.notes.length} notes.`,
     openGraph: {
-     title: `${rawTag} notes.`,
-    description: `You have ${notes.notes.length} ${rawTag} notes.`,
-    url: `https://localhost:3000/notes/filter/${currentTag}`,
+     title: `${titleTag} notes.`,
+    description: `You have ${notes.notes.length} notes.`,
+    url: `https://localhost:3000/notes/filter/${urlTag}`,
         images: [{
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
         width: 1200,

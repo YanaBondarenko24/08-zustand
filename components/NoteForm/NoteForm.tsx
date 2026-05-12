@@ -70,8 +70,7 @@ export default function NoteForm() {
     tag: data.tag as NoteTag,
     };
 try {
-  router.push('/notes/filter/all');
-  createMutation.mutate(data);
+  createMutation.mutate(entriesData);
 } catch (error) {
   alert(error); 
 }  
@@ -81,7 +80,7 @@ try {
           <form action={handleSubmit} className={css.form}>
             <div className={css.formGroup}>
               <label htmlFor="title">Title</label>
-             <input value ={draft.title} onChange={handleChange} id={`${fieldId}-title`} type="text" name="title" className={css.input} />
+             <input value ={draft.title} onChange={handleChange} id={`${fieldId}-"title"`} type="text" name="title" className={css.input} />
              {errors.title && (<p className={css.error}>{errors.title}</p>)}
            </div>
 
@@ -90,7 +89,7 @@ try {
              <textarea
                value ={draft.content}
                onChange={handleChange}
-                id={`${fieldId}-content`}
+                id={`${fieldId}-"content"`}
                 name="content"
                 rows={8}
                 className={css.textarea}
@@ -100,7 +99,7 @@ try {
 
             <div className={css.formGroup}>
               <label htmlFor="tag">Tag</label>
-              <select value ={draft.tag} onChange={handleChange} id={`${fieldId}-tag`} name="tag" className={css.select}>
+              <select value ={draft.tag} onChange={handleChange} id={`${fieldId}-"tag"`} name="tag" className={css.select}>
                 <option value="Todo">Todo</option>
                 <option value="Work">Work</option>
                 <option value="Personal">Personal</option>
