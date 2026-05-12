@@ -23,16 +23,20 @@ type Props = {
 export async function generateMetadata({ searchParams, params }: Props):Promise<Metadata>{
   const { slug } = await params;
   const { query, page } = await searchParams;
-    const rawTag = slug?.[0];
-  const tag = rawTag === "all" ? undefined : (rawTag as NoteTag | undefined);
-  const notes = await fetchNotes(query,page,tag)
+    const tag = slug[0];
+  const rawTag = tag === "all" ? undefined : (tag as NoteTag | undefined);
+  const notes = await fetchNotes(query, page, rawTag);
+  const currentTag = rawTag ?? "All";
+
   return {
-    title: `${tag} notes.`,
-    description: `You have ${tag?.length} ${tag} notes.`,
+
+   
+    title: `${currentTag} notes`,
+    description: `You have ${notes.notes.length} ${rawTag} notes.`,
     openGraph: {
-     title: `${tag} notes.`,
-    description: `You have ${tag?.length} ${tag} notes.`,
-    url: `https://localhost:3000/notes/filter/${tag}`,
+     title: `${rawTag} notes.`,
+    description: `You have ${notes.notes.length} ${rawTag} notes.`,
+    url: `https://localhost:3000/notes/filter/${currentTag}`,
         images: [{
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
         width: 1200,
