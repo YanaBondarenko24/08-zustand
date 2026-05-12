@@ -15,13 +15,14 @@ import Pagination from '@/components/Pagination/Pagination';
 import Loader from '@/components/Loader/Loader';
 import toast, { Toaster } from 'react-hot-toast';
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
+import Link from 'next/link';
 
 type Props = {
   tag?: NoteTag;
 };
 
 export default function NotesClient({ tag }: Props) {
-   const [isModalOpen, setIsModalOpen] = useState(false);
+/*    const [isModalOpen, setIsModalOpen] = useState(false); */
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState('')
     const {data,isError,isLoading,isSuccess} = useQuery({
@@ -52,14 +53,14 @@ export default function NotesClient({ tag }: Props) {
             <SearchBox text={search} onSearch={handleSearch} />
             <Toaster/>
        {totalPages > 1 && isSuccess && <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={setCurrentPage}/>}
-         <button onClick={() => setIsModalOpen(true)} className={css.button}>Create note +</button>
-         {isModalOpen && (
+         <Link href="/notes/action/create" className={css.button}>Create note +</Link>
+{/*          {isModalOpen && (
         <Modal onClose={() => {
             setIsModalOpen(false); 
                 }}>
-            <NoteForm  onCancel={() => setIsModalOpen(false) }/>
+            <NoteForm  onCancel={() => setIsModalOpen(false) } />
         </Modal>
-      )}
+      )} */}
       </header>
       
         {isLoading && <Loader />}

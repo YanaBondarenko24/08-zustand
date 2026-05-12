@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { Note,NoteTag } from '../types/note';
-import type { NoteFormValues } from '../components/NoteForm/NoteForm';
+import  {NoteFormValues} from '../components/NoteForm/NoteForm';
 
 const BASE_URL = "https://notehub-public.goit.study/api";
 const myKey = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
@@ -55,14 +55,15 @@ return res.data
 }
 
 export async function fetchNoteById (id:string) {
-  const res = await axios.get<Note>(`${BASE_URL}/notes/${id}`,
+  const res = await fetch(`${BASE_URL}/notes/${id}`,
       {
         headers: {
          Authorization: `Bearer ${myKey}`  
         },
     }
   )
-
-  return res.data;
+    if (!res.ok) throw new Error('Failed to feach post!');
+    const data = (await res.json()) as Note;
+  return data;
 }
 
