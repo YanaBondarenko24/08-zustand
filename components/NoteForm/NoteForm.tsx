@@ -79,17 +79,17 @@ try {
        return (
           <form action={handleSubmit} className={css.form}>
             <div className={css.formGroup}>
-              <label htmlFor="title">Title</label>
-             <input value ={draft.title} onChange={handleChange} id={`${fieldId}-"title"`} type="text" name="title" className={css.input} />
+              <label  htmlFor={`${fieldId}-title`}>Title</label>
+             <input value ={draft.title} onChange={handleChange} id={`${fieldId}-title`} type="text" name="title" className={css.input} />
              {errors.title && (<p className={css.error}>{errors.title}</p>)}
            </div>
 
             <div className={css.formGroup}>
-              <label htmlFor="content">Content</label>
+              <label htmlFor={`${fieldId}-content`}>Content</label>
              <textarea
                value ={draft.content}
                onChange={handleChange}
-                id={`${fieldId}-"content"`}
+                id={`${fieldId}-content`}
                 name="content"
                 rows={8}
                 className={css.textarea}
@@ -98,8 +98,8 @@ try {
             </div>
 
             <div className={css.formGroup}>
-              <label htmlFor="tag">Tag</label>
-              <select value ={draft.tag} onChange={handleChange} id={`${fieldId}-"tag"`} name="tag" className={css.select}>
+              <label htmlFor={`${fieldId}-tag`}>Tag</label>
+              <select value ={draft.tag} onChange={handleChange} id={`${fieldId}-tag`} name="tag" className={css.select}>
                 <option value="Todo">Todo</option>
                 <option value="Work">Work</option>
                 <option value="Personal">Personal</option>
