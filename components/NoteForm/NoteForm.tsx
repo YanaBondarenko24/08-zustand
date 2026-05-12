@@ -70,7 +70,7 @@ export default function NoteForm() {
     tag: data.tag as NoteTag,
     };
 try {
-  createMutation.mutate(entriesData);
+  await createMutation.mutateAsync(entriesData);
 } catch (error) {
   alert(error); 
 }  
@@ -109,7 +109,7 @@ try {
             </div>
 
             <div className={css.actions}>
-              <button type="button" className={css.cancelButton} onClick={() => { router.push("/notes/filter/all") }}>
+              <button type="button" className={css.cancelButton} onClick={() => { router.back()}}>
                 Cancel
               </button>
               <button

@@ -12,32 +12,33 @@ import { Metadata } from 'next';
 
 
 type Props = {
-  searchParams: Promise<{
+  searchParams:{
     query: string,
     page: number,
-  }>;
+  };
   params: Promise<{ slug: string[] }>;
 };
 
 
 export async function generateMetadata({ searchParams, params }: Props):Promise<Metadata>{
   const { slug } = await params;
-  const { query, page } = await searchParams;
+  const { query, page } = searchParams;
     const tag = slug[0];
   const rawTag = tag === "all" ? undefined : (tag as NoteTag | undefined);
   const notes = await fetchNotes(query, page, rawTag);
   const titleTag = rawTag ?? "All";
-  const urlTag = rawTag ?? "all"
+  const urlTag = rawTag ?? "all";
+
 
   return {
 
    
     title: `${titleTag} notes`,
-    description: `You have ${notes.notes.length} notes.`,
+    description: `Browse ${titleTag} notes with organized tasks, reminders, and important information.You have ${notes.notes.length} notes.`,
     openGraph: {
      title: `${titleTag} notes.`,
-    description: `You have ${notes.notes.length} notes.`,
-    url: `https://localhost:3000/notes/filter/${urlTag}`,
+    description: `Browse ${titleTag} notes with organized tasks, reminders, and important information.You have ${notes.notes.length} notes.`,
+    url: `https://08-zustand-beta-nine.vercel.app/notes/filter/${urlTag}`,
         images: [{
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
         width: 1200,
